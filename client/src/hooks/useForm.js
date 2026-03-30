@@ -34,11 +34,11 @@ const useForm = (initialValues = {}) => {
     setErrors({});
   }, [initialValues]);
 
-  const setValues2 = useCallback((newValues) => {
+  const setFormValues = useCallback((newValues) => {
     setValues(newValues);
   }, []);
 
-  return { values, errors, handleChange, handleSubmit, setFieldError, reset, setValues: setValues2 };
+  return { values, errors, handleChange, handleSubmit, setFieldError, reset, setValues: setFormValues };
 };
 
 export default useForm;

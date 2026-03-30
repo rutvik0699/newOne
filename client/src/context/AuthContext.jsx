@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = useCallback(async (credentials) => {
     const response = await apiLogin(credentials);
-    const { token: newToken, user: newUser } = response.data;
+    const { accessToken: newToken, user: newUser } = response.data;
     localStorage.setItem('token', newToken);
     localStorage.setItem('user', JSON.stringify(newUser));
     setToken(newToken);

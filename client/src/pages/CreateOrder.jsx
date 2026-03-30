@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getItems, createOrder, updateOrder, getOrder } from '../services/api';
 import { AppContext } from '../context/AppContext';
+import useAuth from '../hooks/useAuth';
 
 const STATUS_OPTIONS = ['Pending', 'Processing', 'Shipped', 'Completed', 'Cancelled'];
 
@@ -10,6 +11,7 @@ const CreateOrder = () => {
   const isEdit = !!id;
   const navigate = useNavigate();
   const { showToast } = useContext(AppContext);
+  const { user } = useAuth();
 
   const [availableItems, setAvailableItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -85,6 +87,7 @@ const CreateOrder = () => {
     setSubmitting(true);
     try {
       const payload = {
+        userId: user?.id || user?._id,
         items: selectedItems.map(si => ({ itemId: si._id, quantity: si.quantity, price: si.price })),
         status,
         notes,

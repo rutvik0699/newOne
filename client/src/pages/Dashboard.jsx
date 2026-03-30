@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   if (loading) return <Loading fullScreen />;
 
-  const maxSales = Math.max(...monthlySales.map(s => s.total || s.amount || 0), 1);
+  const maxSales = Math.max(...monthlySales.map(s => s.totalRevenue || s.total || s.amount || 0), 1);
 
   return (
     <div className="p-6 space-y-6">
@@ -71,7 +71,7 @@ const Dashboard = () => {
           ) : (
             <div className="flex items-end gap-2 h-48 overflow-x-auto pb-2">
               {monthlySales.map((item, idx) => {
-                const value = item.total || item.amount || 0;
+                const value = item.totalRevenue || item.total || item.amount || 0;
                 const height = Math.max((value / maxSales) * 100, 2);
                 return (
                   <div key={idx} className="flex flex-col items-center gap-1 flex-1 min-w-[40px]">
