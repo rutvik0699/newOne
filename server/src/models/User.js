@@ -56,7 +56,12 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
 };
 
 userSchema.virtual('fullName').get(function () {
-  return this.name;
+  const parts = this.name.trim().split(' ');
+  return {
+    first: parts[0] || '',
+    last: parts.slice(1).join(' ') || '',
+    full: this.name,
+  };
 });
 
 module.exports = mongoose.model('User', userSchema);
