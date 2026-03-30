@@ -54,7 +54,7 @@ export const getOrder = (id) => api.get(`/orders/${id}`);
 export const createOrder = (data) => api.post('/orders', data);
 export const updateOrder = (id, data) => api.put(`/orders/${id}`, data);
 export const deleteOrder = (id) => api.delete(`/orders/${id}`);
-export const getOrderAnalytics = () => api.get('/orders/analytics');
+export const getOrderAnalytics = () => api.get('/orders/analytics/summary');
 
 // Dashboard
 export const getDashboardStats = () => api.get('/dashboard/stats');

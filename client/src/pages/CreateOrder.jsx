@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getItems, createOrder, updateOrder, getOrder } from '../services/api';
 import { AppContext } from '../context/AppContext';
 
-const STATUS_OPTIONS = ['pending', 'processing', 'shipped', 'completed', 'cancelled'];
+const STATUS_OPTIONS = ['Pending', 'Processing', 'Shipped', 'Completed', 'Cancelled'];
 
 const CreateOrder = () => {
   const { id } = useParams();
@@ -13,7 +13,7 @@ const CreateOrder = () => {
 
   const [availableItems, setAvailableItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [status, setStatus] = useState('pending');
+  const [status, setStatus] = useState('Pending');
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -24,7 +24,7 @@ const CreateOrder = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await getItems({ limit: 100, status: 'active' });
+        const res = await getItems({ limit: 100, isActive: true });
         const d = res.data;
         setAvailableItems(d.items || d.data || d || []);
       } catch {
@@ -41,7 +41,7 @@ const CreateOrder = () => {
         try {
           const res = await getOrder(id);
           const order = res.data;
-          setStatus(order.status || 'pending');
+          setStatus(order.status || 'Pending');
           setNotes(order.notes || '');
           if (Array.isArray(order.items)) {
             setSelectedItems(order.items.map(i => ({
@@ -85,7 +85,7 @@ const CreateOrder = () => {
     setSubmitting(true);
     try {
       const payload = {
-        items: selectedItems.map(si => ({ item: si._id, quantity: si.quantity, price: si.price })),
+        items: selectedItems.map(si => ({ itemId: si._id, quantity: si.quantity, price: si.price })),
         status,
         notes,
         total,

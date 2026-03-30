@@ -6,7 +6,7 @@ import { getItems, createItem, updateItem, deleteItem } from '../services/api';
 import { AppContext } from '../context/AppContext';
 import useForm from '../hooks/useForm';
 
-const STATUS_OPTIONS = ['active', 'inactive', 'out_of_stock'];
+const STATUS_OPTIONS = ['active', 'inactive'];
 const CATEGORY_OPTIONS = ['Electronics', 'Clothing', 'Food', 'Books', 'Other'];
 
 const itemInitial = { name: '', sku: '', category: '', price: '', quantity: '', status: 'active', description: '' };
